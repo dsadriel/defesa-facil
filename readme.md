@@ -1,4 +1,7 @@
-A fim de facilitar a divulgação das defesas de Mestrado, Doutorado e TCC, foi desenvolvida uma ferramenta para gerar as imagens, com base nas artes criadas por Clarissa Taborda. Foi utilizado Python e, em especial, a biblioteca Pillow.  Para facilitar o uso dentro do Comunica, os arquivos são combinados em arquivo executável utilizando PyInstaller. 
+# DefesaFácil: Solução para criação de imagens de defesas de TCC, mestrado e doutorado.
+
+
+**A fim de facilitar a divulgação das defesas de Mestrado, Doutorado e TCC por parte do Setor de Comunicação do INF/UFRGS (comunica@inf.ufrgs.br)**, foi desenvolvida uma ferramenta para gerar as imagens, com base nas artes criadas por Clarissa Taborda. Foi utilizado Python e, em especial, a biblioteca Pillow.  Para facilitar o uso dentro do Comunica, os arquivos são combinados em arquivo executável utilizando PyInstaller. 
 
 ## Defesas de Mestrado e Doutorado
 
