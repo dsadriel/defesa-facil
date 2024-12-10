@@ -1,0 +1,8 @@
+build/
+__pycache__/
+output/**/*.png
+output/**/*.csv
+*.spec
+*.log
+credenciais.json
+data/*.json
