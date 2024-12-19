@@ -24,11 +24,13 @@ app.title("Gerar imagens de defesa de TCCs")
 app.iconbitmap('assets/img/icon.ico')
 app.grid_columnconfigure((0, 1), weight=1)
 
+TODAY = datetime.date.today()
 
 # Define as variáveis que serão usadas
 variables = {
-    'data_inicio': customtkinter.StringVar(value=datetime.date.today().strftime('%d/%m/%Y')),
-    'intervalo': customtkinter.StringVar(value=6)
+    'data_inicio': customtkinter.StringVar(value=TODAY.strftime('%d/%m/%Y')),
+    'intervalo': customtkinter.StringVar(value=6),
+    'semestre': customtkinter.StringVar(value=f'{TODAY.year}/{1 if TODAY.month < 6 else 2}')
     }
 
 listaTCCs = []
@@ -83,7 +85,7 @@ def buscarDados(e = None):
 
         listaTCCs = filtered
     
-    nomes.configure(text=f"Apresentações no intervalo selecionado [{len(listaTCCs)}]:\n {', \n'.join([f'{x['Aluno']} ({x['Curso']})' for x in listaTCCs])}")
+    nomes.configure(text=f"Apresentações no intervalo selecionado [{len(listaTCCs)}]:\n {', \n'.join([f'{x['Aluno']} ({x['Curso']}) - {x['Data']}' for x in listaTCCs])}")
 
 def importarDadosDoPortal():
     """
@@ -124,6 +126,7 @@ def importarDadosDoPortal_():
 
 def gerarImagens(stories = True, feed = False):
     global listaTCCs
+    global variables
     dados = listaTCCs
 
     if(len(dados) == 0):
@@ -145,11 +148,11 @@ def gerarImagens(stories = True, feed = False):
     if(stories):
         grupos = [ecp[i:i+4] for i in range(0, len(ecp), 4)] # Agrupa de 4 em 4
         for s in grupos:
-            modeloTCCStories(s, '2024/1')
+            modeloTCCStories(s, variables['semestre'].get())
         
         grupos = [cic[i:i+4] for i in range(0, len(cic), 4)] # Agrupa de 4 em 4
         for s in grupos:
-            modeloTCCStories(s, '2024/1')
+            modeloTCCStories(s, variables['semestre'].get())
 
     os.startfile('output\\imagens')
     CTkDialog('Sucesso', 'Imagens geradas com sucesso')
@@ -179,12 +182,14 @@ ultima_atualizacao.configure(text=f"Última atualização: {datetime.datetime.fr
 customtkinter.CTkLabel(app, text="Data de ínicio:").grid(row=1, column=0, padx=20, pady=20)
 data_ini =  customtkinter.CTkEntry(app, textvariable=variables['data_inicio'])
 data_ini.grid(row=1, column=1, padx=padx, pady=pady, sticky=sticky)
-data_ini.bind("<Return>", buscarDados)
 
 customtkinter.CTkLabel(app, text="Intervalo de dias:").grid(row=1, column=2, padx=20, pady=20)
 intervalo = customtkinter.CTkEntry(app, textvariable=variables['intervalo'])
 intervalo.grid(row=1, column=4, padx=padx, pady=pady, sticky=sticky)
-intervalo.bind("<Return>", buscarDados)
+
+customtkinter.CTkLabel(app, text="Semestre:").grid(row=2, column=0, padx=20, pady=20)
+semestre = customtkinter.CTkEntry(app, textvariable=variables['semestre'])
+semestre.grid(row=2, column=1, padx=padx, pady=pady, sticky=sticky)
 
 nomes = customtkinter.CTkLabel(app, text="")
 nomes.grid(row=5, column=0, columnspan=5, sticky='ew')
@@ -199,4 +204,5 @@ customtkinter.CTkButton(master=app, text="Gerar CSV calendário", command=gerarC
 
 # Inicia a aplicação
 buscarDados()
+app.bind("<Motion>", buscarDados)
 app.mainloop()
