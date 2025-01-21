@@ -118,14 +118,14 @@ def dTitulo(img:Image, info, pos, escala=1):
     icon = Image.open('./assets/img/caderno.png')
     icon = ImageOps.contain(icon, (65, 65))
 
-    img.paste(icon, pos, mask=icon)
+    img.paste(icon, [pos[0], pos[1]+25], mask=icon)
 
     font = getFont('JosefinSans/Bold.ttf', 40 * escala)
     y = pos[1] -15
     if(font.getlength(info)  <= 775):
         y = pos[1] + 15
     
-    textBox(info, ImageDraw.Draw(img), font, (pos[0] + 65, y, 775, 140), hAllign=tbA.LEFT, vAllign=tbA.TOP, fill=(0,0,0))
+    textBox(info, ImageDraw.Draw(img), font, (pos[0] + 65, y, 825, 150), hAllign=tbA.LEFT, vAllign=tbA.CENTER, fill=(0,0,0), showBorders=False)
 
     
 def dLocal(img:Image, info, pos):
@@ -188,23 +188,21 @@ def modeloDefesaFeed(tituloCard, dados: dict, escalaTitulo=1):
     imgFeed =  Image.open("./assets/img/pos/fundo-feed.png")
     # Gera imagem para o totem
     d =  ImageDraw.Draw(imgFeed)
-    textBox(tituloCard.upper(), d,  getFont('MyriadPro/Regular.OTF', 50), (65, 205, 1000, 50), spacing=-1, fill=(0,0,0))
+    textBox(tituloCard.upper(), d,  getFont('MyriadPro/Regular.OTF', 50), (65, 205+120, 1000, 50), spacing=-1, fill=(0,0,0))
     # Data, hora e local    
-    infStart = 670
+    infStart = 820
     infoSpacing = 70
-    dData(imgFeed, dados['Data'], (415, infStart))
-    dData(imgFeed, dados['Hora'].replace(':', 'h'), (415, infStart + infoSpacing), True)
-    dLocal(imgFeed, dados['Local'], (415, infStart + 2*infoSpacing))
+    dData(imgFeed, dados['Data'], (560, infStart))
+    dData(imgFeed, dados['Hora'].replace(':', 'h'), (560, infStart + infoSpacing), True)
+    dLocal(imgFeed, dados['Local'], (560, infStart + 2*infoSpacing))
     # Nome do aluno
-    dNomes(imgFeed, dados['Aluno'], (65, 330))
+    dNomes(imgFeed, dados['Aluno'], (65, 465))
     # Orientador
-    dNomes(imgFeed, dados['Orientador'], (65, 385), dNomesT.Orientador)
+    dNomes(imgFeed, dados['Orientador'], (65, 520), dNomesT.Orientador)
     # Coorientador
     if dados['Coorientador'] != "":
-        dNomes(imgFeed, dados['Coorientador'], (65, 440), dNomesT.Coorientador)
+        dNomes(imgFeed, dados['Coorientador'], (65, 575), dNomesT.Coorientador)
     
-    dTitulo(imgFeed, dados['Titulo'], (67, 515), escalaTitulo)
+    dTitulo(imgFeed, dados['Titulo'], (67, 650), escalaTitulo)
     imgFeed.show()
     imgFeed.save(f'./output/imagens/defesa-{dados['Aluno'].replace(' ', '-')}(f).png')
-
-    
