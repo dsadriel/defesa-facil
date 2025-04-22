@@ -22,6 +22,32 @@ A ferramenta gera as imagens e o arquivo CSV para importação no site, utilizan
 
 Conforme acordo entre a equipe do Comunica, o programa era executado semanalmente nas segundas-feiras para importar os novos TCCs e em seguida gerar os arquivos necessários para as redes sociais e site.
 
+## Instruções de Uso
+
+1. Clone este repositório:
+    ```bash
+    git clone https://github.com/dsadriel/defesa-facil.git
+    cd defesa-facil
+    ```
+2. Crie e ative um ambiente virtual:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # No Windows, use: venv\Scripts\activate
+    ```
+3. Instale os requisitos necessários:
+    ```bash
+    pip install -r requirements.txt
+    ```
+4. Atualize o arquivo `credenciais.json` com as informações apropriadas.
+5. Execute o programa conforme necessário.
+    ```bash
+    python gerarImagensPOS_email.py
+    python ggerarImagensTCC_GUI.py
+    ```
+
+## Instruções de Compilação
+
+1. Execute o arquivo `DIST.bat` para gerar o executável.
 
 ## Formato do arquivo `credenciais.json`
 

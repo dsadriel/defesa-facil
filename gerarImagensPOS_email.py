@@ -55,11 +55,13 @@ def button_function():
     conteudoEmail = _conteudoEmail.get('1.0', 'end-1c')
     escalaCard = float(_escalaCard.get().replace(',', '.')) if _escalaCard.get() else 1
     tituloCard = _tituloCard.get() if _tituloCard.get() else None
-    dados = intepretarDados('pos', 'email', conteudoEmail)
 
-    if(not dados):
-        CTkDialog('Erro', 'Não foi possível interpretar os dados do email')
-    
+    try:
+        dados = intepretarDados('pos', 'email', conteudoEmail)
+    except Exception as e:
+        CTkDialog('Erro', f'Não foi possível interpretar os dados do email\n\n{e}')
+        return
+
     ## Se o título não for informado, usa o 
     if(not tituloCard):
         tituloCard = dados['Tipo'] if dados['Tipo'] else 'Tese de Doutorado'

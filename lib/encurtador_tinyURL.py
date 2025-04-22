@@ -5,11 +5,9 @@ Desenvolvido por Adriel de Souza (adsouza@inf.ufrgs.br)
 
 import requests
 import json
-import colorama
 from unidecode import unidecode 
 from lib.utils import get_credentials
 from termcolor import cprint
-colorama.init()
 
 
 tinyurl = get_credentials('TinyURL')
@@ -124,8 +122,7 @@ def shorten_url(url:str, alias:str=None):
                 return shorten_url(url, alias + str(contador + 1))
         else:
             # Se houve outro erro, imprime o erro e retorna None
-            cprint(response.json(), 'red')
-            raise Exception('Erro ao encurtar a URL')
+            raise Exception('Erro ao encurtar a URL: ' + response.json())
 
     # Retornando a url encurtada
     update_aliases_cache(alias, response.json()['data']['tiny_url'])

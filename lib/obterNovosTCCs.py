@@ -5,13 +5,11 @@ Desenvolvido por Adriel de Souza (adsouza@inf.ufrgs.br)
 
 
 import json
-import colorama
 from termcolor import cprint
 import requests
 
 from lib.interpretadorDados import intepretarDados 
 from lib.utils import get_credentials
-colorama.init()
 
 
 def obterNovosTCCs(echo = True, saveDiff = True):

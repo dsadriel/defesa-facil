@@ -1,0 +1,12 @@
+{
+    "portalServicosINF": {
+        "__info": "Login e senha para acessar o portal do INF para pegar as informações dos TCCs",
+        "login": "USUÁRIO",
+        "senha": "SENHA-PORTAL"
+    },
+    "TinyURL": {
+        "__info": "Chave de acesso para a API do TinyURL",
+        "email": "E-MAIL",
+        "token": "TOKEN-ACESSO"
+    }
+}
