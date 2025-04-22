@@ -29,7 +29,7 @@ Conforme acordo entre a equipe do Comunica, o programa era executado semanalment
     git clone https://github.com/dsadriel/defesa-facil.git
     cd defesa-facil
     ```
-2. Crie e ative um ambiente virtual:
+2. Crie e ative um ambiente virtual (opcional):
     ```bash
     python -m venv venv
     source venv/bin/activate  # No Windows, use: venv\Scripts\activate
@@ -38,11 +38,11 @@ Conforme acordo entre a equipe do Comunica, o programa era executado semanalment
     ```bash
     pip install -r requirements.txt
     ```
-4. Atualize o arquivo `credenciais.json` com as informações apropriadas.
+4. **Atualize o arquivo** `credenciais.json` com as informações apropriadas.
 5. Execute o programa conforme necessário.
     ```bash
     python gerarImagensPOS_email.py
-    python ggerarImagensTCC_GUI.py
+    python gerarImagensTCC_GUI.py
     ```
 
 ## Instruções de Compilação
